@@ -1,0 +1,949 @@
+---
+title: 20INMCAL204- Laboratory Report
+author:
+  - name: Prudhwi Raj Krishna V
+    email: prudhwi.inmca2025@saintgits.org
+    affiliation: Student, INMCA 20-25
+    correspondingauthor: true
+    footnote: 1
+  - name: Siju K.S
+    email: siju.swamy@saintgits.org
+    affiliation: Saintgits College of Engineering (Autonomous)
+    footnote: 2
+  - name: Jobin Jose
+    email: jobin.jose@saintgits.org
+    affiliation: Saintgits College of Engineering (Autonomous)
+    footnote: 2
+address:
+  - code: Student, INMCA 20-25
+    address: Department of Computer Applications, RB402
+  - code: Saintgits College of Engineering (Autonomous)
+    address: Department of Mathematics, AB304
+footnote:
+  - code: 1
+    text: "Student, 20INMCAL204."
+  - code: 2
+    text: "Course Faculty, 20INMCAL204."
+abstract: |
+ Experiments listed in the Lab Manual are successfully executed in the R version 4.1.0. Details of the experiments with input \& ouput are summerized in the form of a report. Experiments are arranged in the form of sections. This report is prepared using the R-package `rticles` [@mrticles].
+journal: "Mathematics Department for Evaluation"
+date: "`r Sys.Date()`"
+classoption: preprint, 3p, authoryear
+bibliography: mybibfile.bib
+linenumbers: true
+numbersections: true
+# Use a CSL with `citation_package = "default"`
+# csl: https://www.zotero.org/styles/elsevier-harvard
+output: 
+  rticles::elsevier_article:
+    keep_tex: true
+    citation_package: natbib
+---
+\tableofcontents
+\newpage
+#   Experiment--1 :Basic Math & Stao Operations in R
+
+## <u> **Aim** </u>
+
+Execute basic mathematical; and statistical operations in R
+
+## <u>**Algorithm**</u>
+
+**Step1:** Create `R code` chunks
+
+**Step2:** Write math expressions
+
+**Step3:** Run the chunk codes
+
+**Step4:** Report the results
+
+## [**R-code**]{.underline}
+_In this experiment basic mathematical operations will be tested using R_
+
+```{r addition}
+# addition
+a=10;
+b=125;
+total=a+b;
+total;
+```
+```{r subtraction}
+x=425;
+y=345;
+x-y;
+```
+```{r MULTIPLICATION}
+a1=34;
+a2=5.4;
+s=prod(a1,a2);
+paste0("Product of ",a1," and ",a2, " is ",s);
+```
+```{r division}
+c=32;
+d=6;
+qu=c/d;
+qu;
+```
+```{r reminder}
+rem=c%%d;
+rem;
+```
+```{r flooring operation}
+r=32;
+s=2;
+d=r%/%s;
+d;
+```
+```{r power operations}
+a=5;
+b=5^2;
+b;
+
+```
+```{r power operations in array}
+v=1:10;
+v^10;
+```
+```{r scalar multiplication on array}
+ar=c(1,5,7,9,21);
+5*ar;
+```
+```{r vector multiplication}
+br=c(1,4,1,2,8);
+ar;br;ar*br;
+```
+```{r round down a number}
+floor(3.1427)
+```
+```{r round up a number}
+ceiling(.6879)
+```
+```{r factorial of a number}
+factorial(10)
+```
+To find $nCr=\frac{n!}{r!(n-r)!}$
+```{r combination}
+choose(5,3)
+```
+Permutation can be found using :$^n P_r=n\times(n-1) \times \cdots \times (n-r+1)$
+```{r permutation}
+prod(10:(10-4+1))
+```
+
+## Creating a user Dataframe
+```{r}
+Names=c("Ben","Alice","Jiju","Jilu","Libin","Abin")
+Age=c(18,21,19,23,32,30)
+Salary=c(23000,18000,21000,35000,40000,45000)
+Data=data.frame(Names,Age,Salary)
+Data
+```
+```{r}
+Data$Names[1:3]
+```
+
+```{r}
+Data$Names[1]
+```
+
+```{r}
+mean(Data$Age)
+
+```
+
+## [**Result**]{.underline}
+
+Basic Maths and Stao are implemented using R Language.
+
+
+#   Experiment 2
+
+## **Aim**
+  Implement various EDA techniques using R
+  
+## **Algorithm**
+
+**Step 1:** Create R code chunks for coding
+
+**Step 2:** Create boxplot using built-in dataset
+
+**Step 3:** Create a histogram using R
+
+**Step 4:** Create a scatter using R
+
+**Step 5:** Create a Running time series using R
+
+## **R Markdown**
+
+### Boxplot:
+<i>The Youden-Beale Experiment. We have used this dataset in Chapter 2, Section
+4, and in a few other places too. We need to compare here if the two virus extracts have a
+varying effect on the tobacco leaf or not. We have already read this dataset into R on more
+than one occasion. First, the boxplot is generated without the notches for yb data.frame
+using the boxplot function. The median for Preparation_1 certainly appears higher than for
+Preparation_2, see Part A of Figure 3.1. Thus, we are tempted to check whether the medians
+for the two preparations are significantly different with the notched boxplot. Now, the boxplot
+is generated to produce the notches with the option notch=TRUE. Appropriate headers for a
+figure are specified with the title function. Most importantly, we have used a powerful graphical
+technique of R through par, which is useful in setting graphical parameters</i>
+
+```{r}
+library(ACSWR)
+data(yb)
+par(mfrow=c(1,2))
+boxplot(yb)
+title("A: Boxplot for Youden-Beale Data")
+boxplot(yb,notch=TRUE)
+title("B: Notched Boxplots Now")
+summary(yb$Preparation_1)
+summary(yb$Preparation_2)
+```
+
+## Histogram:
+
+<i>The histogram was invented by the eminent statistician Karl Pearson and is one of the earliest
+types of graphical display. It goes without saying that its origin is earlier than EDA, at least the
+EDA envisioned by Tukey, and yet it is considered by many EDA experts to be a very useful
+graphical technique, and makes it to the list of one of the very useful practices of EDA. The
+basic idea is to plot a bar over an interval proportional to the frequency of the observations
+that lie in that interval. If the sample size is moderately good in some sense and the sample is
+a true representation of a population, the histogram reveals the shape of the true underlying
+uncertainty curve. Though histograms are plotted as two-dimensional, they are essentially
+one-dimensional plots in the sense that the shape of the uncertainty curve is revealed without
+even looking at the range of the x-axis. Furthermore, the Pareto chart, stem-and-leaf plot, and
+a few others may be shown as special cases of the histogram.We begin with a “cooked” dataset
+for understanding a range of uncertainty curves.
+Understanding Histogram of Various Uncertainty Curves. In the dataset sample, we have data
+from five different probability distributions. Towards understanding the plausible distribution
+of the samples, we plot the histogram and see how useful it is.</i>
+
+```{r}
+data(sample)
+layout(matrix(c(1,1,2,2,3,3,0,4,4,5,5,0), nrow=2, ncol=6, byrow=TRUE),respect=FALSE)
+#matrix(c(1,1,2,2,3,3,0,4,4,5,5,0), nrow=2, ncol=6, byrow=TRUE)
+hist(sample[,1],main="Histogram of Sample 1",xlab="sample1", ylab="frequency")
+hist(sample[,2],main="Histogram of Sample 2",xlab="sample2", ylab="frequency")
+hist(sample[,3],main="Histogram of Sample 3",xlab="sample3", ylab="frequency")
+hist(sample[,4],main="Histogram of Sample 4",xlab="sample4", ylab="frequency")
+hist(sample[,5],main="Histogram of Sample 5",xlab="sample5", ylab="frequency")
+
+
+```
+### Histogram extensions
+
+<i> The histogram displays the frequencies over the intervals and for moderately large number
+of observations, it reflects the underlying probability distribution. The boxplot shows how
+evenly the data is distributed across the five important measures, although it cannot reveal
+the probability distribution in a better way than a boxplot. The boxplot helps in identifying
+the outliers in a more apparent way than the histogram. Hence, it would be very useful if we
+could bring together both these ideas in a closer way than look at them differently for outliers
+and probability distributions. An effective way of obtaining such a display is to place the
+boxplot along the x-axis of the histogram. This helps in clearly identifying outliers and also the
+appropriate probability distribution.
+The R package sfsmisc contains a function histBxp, which nicely places the boxplot along
+the x-axis of the histogram.</i>
+
+```{r}
+library(sfsmisc)
+par(mfrow=c(1,3))
+histBxp(sample$Sample_1,col="orange",boxcol="red",xlab="x")
+histBxp(sample$Sample_2,col="grey",boxcol="grey",xlab="x")
+histBxp(sample$Sample_3,col="brown",boxcol="brown",xlab="x")
+title("Boxplot and Histogram Complementing",outer=TRUE,line=-1)
+
+```
+### **Pareto Chart**
+
+The Pareto chart has been designed to address the implicit questions answered by the Pareto
+law. The common understanding of the Pareto law is that “majority resources” is consumed by
+a “minority user”. The most common of the percentages is the 80–20 rule, implying that 80%
+of the effects come from 20% of the causes. The Pareto law is also known as the law of vital
+few, or the 80–20 rule. The Pareto chart gives very smart answers by completely answering how
+much is owned by how many. Montgomery (2005), page 148, has listed the Pareto chart as one
+of the seven major tools of Statistical Process Control.
+A Pareto chart is a bar graph. The lengths of the bars represent frequency or cost (time or
+money), and are arranged with longest bars on the left and the shortest to the right. In this
+way the chart visually depicts which situations are more significant. This cause analysis tool is
+considered one of the seven basic quality tools.
+
+```{r}
+library(qcc)
+freq <- c(14,2,1,2,3,8,1)
+names(freq) <- c("Contamination","Corrosion","Doping", "Metallization", "Miscellaneous", "Oxide Effect","Silicon Effect")
+pareto.chart(freq)
+
+```
+
+
+
+## <b>Results & Discussions</b>
+
+<i>Various visualization techniques for data analysis are implemented in R.</i><br><br>
+
+#  Experiment-3 Descriptive Statistical Analysis
+
+## Aim
+
+To administer baseline statistical analysis on a dataset and report descriptive analysis summary.
+
+
+## Algorithm
+
+* Step-1: Load the data and required R-packages for data analysis
+
+* Step-2: Apply basic statistic functions 
+
+* Step-3: Create appropriate visualizations
+
+* Step-4: Report the findings based on descriptive analysis
+
+## R-code
+
+>Loading data
+
+```{r}
+df<-read.csv("https://raw.githubusercontent.com/sijuswamy/StatLab/main/Dataset_1.csv",header = TRUE)
+df$Gender=as.factor(df$Gender)
+
+head(df)
+```
+
+```{r}
+str(df)
+```
+> Finding Column sums
+
+```{r,warning=FALSE}
+library(dplyr)
+df1=select(df,-Student_Name,-Gender)
+Sub_total=colSums(df1)
+Sub_average=colMeans(df1)
+```
+```{r}
+round(Sub_average,2)
+```
+```{r}
+library(ggplot2)
+crop=ggplot(data=df, mapping=aes(x=Gender, y=X20IMCAT201))+geom_boxplot()+labs(x ="Gender", y = "Computer Organization marks")
+crop
+```
+
+```{r}
+library(ggplot2)
+  crop=ggplot(data=df, mapping=aes(x=Gender, y=X20IMCAT203))+geom_boxplot()+labs(x ="Gender", y = "Mathematics marks")
+crop
+```
+
+
+```{r}
+library(ggplot2)
+  crop=ggplot(data=df, mapping=aes(x=Gender, y=X20IMCAT205))+geom_boxplot()+labs(x ="Gender", y = "OOPS marks")
+crop
+```
+
+
+```{r}
+library(ggplot2)
+  crop=ggplot(data=df, mapping=aes(x=Gender, y=X20IMCAT207))+geom_boxplot()+labs(x ="Gender", y = "Accountancy marks")
+crop
+```
+
+
+```{r}
+library(ggplot2)
+  crop=ggplot(data=df, mapping=aes(x=Gender, y=X20IMCAT209))+geom_boxplot()+labs(x ="Gender", y = "DS marks")
+crop
+```
+
+```{r}
+ggplot(data = df, aes(x = X20IMCAT201,fill = df$Gender)) + geom_histogram(binwidth = 5, fill = "seagreen",color = "red")+ 
+  theme(legend.position = "top")#+facet_grid(~Gender)
+
+```
+
+```{r}
+ggplot(data = df, aes(x = X20IMCAT203,fill = df$Gender)) + geom_histogram(binwidth = 5, fill = "seagreen",color = "red")+ 
+  theme(legend.position = "top")#+facet_grid(~Gender)
+
+```
+
+```{r}
+ggplot(data = df, aes(x = X20IMCAT205,fill = df$Gender)) + geom_histogram(binwidth = 5, fill = "seagreen",color = "red")+ 
+  theme(legend.position = "top")#+facet_grid(~Gender)
+
+```
+
+```{r}
+ggplot(data = df, aes(x = X20IMCAT207,fill = df$Gender)) + geom_histogram(binwidth = 5, fill = "seagreen",color = "red")+ 
+  theme(legend.position = "top")#+facet_grid(~Gender)
+
+```
+
+```{r}
+ggplot(data = df, aes(x = X20IMCAT209,fill = df$Gender)) + geom_histogram(binwidth = 5, fill = "seagreen",color = "red")+ 
+  theme(legend.position = "top")#+facet_grid(~Gender)
+
+```
+
+```{r}
+plot(density(df$X20IMCAT201))
+```
+```{r}
+plot(density(df$X20IMCAT203))
+```
+
+```{r}
+plot(density(df$X20IMCAT205))
+```
+
+```{r}
+plot(density(df$X20IMCAT207))
+```
+
+```{r}
+plot(density(df$X20IMCAT209))
+```
+
+```{r}
+median(df$X20IMCAT201)
+```
+
+
+
+```{r}
+library(DescTools)
+Mode(df$X20IMCAT201)
+```
+>User defined funtion
+
+```{r}
+var(df$X20IMCAT201)
+```
+
+```{r}
+var(df$X20IMCAT203)
+```
+
+```{r}
+var(df$X20IMCAT205)
+```
+
+```{r}
+var(df$X20IMCAT207)
+```
+
+```{r}
+var(df$X20IMCAT209)
+```
+
+```{r}
+cor(df$X20IMCAT203,df$X20IMCAT207)
+```
+
+```{r}
+calcmode <- function(a) {  
+vector <- unique(a)  
+vector[which.max(tabulate(match(a, vector)))]  
+}  
+```
+
+```{r}
+calcmode(df$X20IMCAT201)
+```
+```{r}
+sd(df$X20IMCAT201)
+```
+
+## Results and discussions
+Various statistical analysis were experimental on a secondary data and appropriate visualizations were used to  interrupt in statistical estimates.
+
+
+# Experiment 4: Statistical Summary and measure of normality of a dataset
+
+## Aim
+
+1. To create the statistical summary of a data
+
+2. To study normality of the data
+
+## Packages used and syntax of R methods
+
+For statistical summary of a given dataset, the `rbase` package will be used. To calculate skewness and kurtosis of dataset, the `ACSWR` is used.
+
+>*Note:* The functions `skewness` and `kurtosis` from the `e1071` package are more generic functions. Another resouse is `moments` package. 
+
+## Algorithm
+* Step 1: Load the dataset
+
+* Step 2: Load necessary packages
+
+* Step 3: Calculate statistical summaries
+
+* Step 4: Calculate the `skewness` and `kurtosis` of the numerical data
+
+* Step 5: Report the results
+
+## R code
+
+```{r}
+#loading package
+library(ACSWR)
+#loading data
+data(yb)
+#view structure of data
+str(yb)
+
+```
+```{r}
+# creating statistical summary
+
+summary(yb)
+```
+```{r}
+range(yb$Preparation_1); range(yb$Preparation_2) # list out ranges of data
+
+```
+
+```{r}
+#skewness and kurtosis of preparation_1
+skewcoeff(yb$Preparation_1); kurtcoeff(yb$Preparation_1)
+```
+```{r}
+#skewness and kurtosis of preparation_2
+skewcoeff(yb$Preparation_2); kurtcoeff(yb$Preparation_2)
+```
+
+## Results & discussions
+
+A distribution is normal then `mean=median=mode` and the skewness is 0 and kurtosis is 2. In this experiment statistical summaries of two variables are created. From the skewness and kurtosis measures, both the variables are positively skewed and `preparation_1` is lepto-kurtic and `preparation_2` is meso-kurtic. Based on the statistical summary and skewness and kurtosis measures, both the variables are different from a normal distribution.
+
+# Experiment 5- Implementation of Bayes Theorem
+
+## Aim
+
+1. To calculate Bayes posterior probability using Bayes theorem
+
+## Packages used and syntax of R methods
+
+Bayes posterior probability can be directly calculated using mathematical method or using the package `LaplacesDemon`.
+
+## Algorithm
+* Step 1: Load the package, prior probabilities and conditionals
+
+* Step 2: Calculate the Bayes posterior probability using the formula-$P(B_j|A)=\dfrac{P(A|B_j)P(B_j)}{\sum\limits_{j=1}^mP(A|B_j)P(B_j)}$
+
+* Step 3: Calculate the same prior probability using `LaplaceDemon` package
+
+* Step 4: Report the results
+
+>*Case:* Classical Problem from Hoel, Port, and Stone (1971). Suppose there are three tables with two drawers each. The first table has a gold coin in each of the drawers, the second table has a gold coin in one drawer and a silver coin in the other drawer, while the third table has silver coins in both of the drawers. A table is selected at random and a drawer is opened which shows a gold coin. 
+
+>*Observation:*The problem is to compute the probability of the other drawer also showing a gold coin. The Bayes formula can be easily implemented in an R program.
+
+## R code
+
+```{r}
+#loading data
+prob_GC <- c(1,1/2,0)
+priorprob_GC <- c(1/3,1/3,1/3)
+```
+
+```{r}
+#calculating postrior probability
+post_GC <- prob_GC*priorprob_GC
+post_GC/sum(post_GC)
+```
+
+```{r}
+# do the same using LaplacesDemon` package
+library(LaplacesDemon)
+BayesTheorem(prob_GC, priorprob_GC)
+
+```
+
+
+## Results & discussions
+
+The Bayes theorem is used to calculate posterior probability of the Mathematical model of the given case. Also the result is verified using the `LaplacesDemon` package.
+
+
+
+# Experiment 6: Binomial Distribution
+
+## Aim
+
+1. To calculate probability mass density, probability distribution and quantiles using binomial distribution
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default). 
+
+The probability mass at a point $x$ can be evaluated using the syntax:
+
+>`dbinom(x=x,size=n,p=p)`.
+
+The probability distribution $P(X\leq x)$ is calculated using the `pbinom()` function. Syntax is: 
+
+>`pbinom(x,size=n,p=p)`
+
+The quantile for probability $p$ can be evaluated using the `quantile()` function. Syntax is:
+
+>`qbinom(prob,size,p=p)`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required distribution
+
+* Step 2: Calculate the required probabilities
+
+* Step 3: Report the results
+
+
+>*Case:* Find the mass function of a binomial distribution with  $n=20,p=0.4$. Also draw the graphs of the mass function and cumulative distribution function.
+
+## R code
+
+```{r}
+# create input parameters
+n=20
+p=0.4
+x=0:20
+```
+### Prbability distribution
+
+```{r}
+#calculating probability mass distribution and cumulative distribution
+pmval=dbinom(x,size=n,prob=p)
+pmval
+```
+
+## Cumulative probability distribution
+
+```{r}
+#calculating cumulative density
+cdval=pbinom(x,size=n,prob=p)
+cdval
+```
+### Plotting the `pmf` and `cdf`
+
+```{r}
+par(mfrow=c(1,2))
+plot(x,pmval,xlab="x",ylab="P(X=x)", main="The Binomial Distribution")
+plot(x,cdval,xlab="x",ylab=expression(P(X<=x)),main="Cumulative Distribution Function")
+
+```
+
+
+## Results & discussions
+
+The `pmf` and `cf` of the Binomial distribution for given input parameters are evaluated and create respective plots.
+
+#  Experiment 7: Poisson Distribution
+
+## Aim
+
+1. To calculate probability mass density, probability distribution and quantiles using Poisson distribution
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default). 
+
+The probability mass at a point $x$ can be evaluated using the syntax:
+
+>`dpois(x=x,lambda=l)`.
+
+The probability distribution $P(X\leq x)$ is calculated using the `ppois()` function. Syntax is: 
+
+>`ppois(x,lambda=l)`
+
+The quantile for probability $p$ can be evaluated using the `qpois()` function. Syntax is:
+
+>`qpois(prob,lambda=l)`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required distribution
+
+* Step 2: Calculate the required probabilities
+
+* Step 3: Report the results
+
+
+>*Case:* Given the data $n=50$, mean, $\lambda=25$, use appropriate function to find the mass function of a Poisson distribution. Also draw the graphs of the mass function and cumulative distribution function.
+
+## R code
+
+```{r}
+# create input parameters
+n <-50; l <- 25
+x=0:50
+```
+### Prbability distribution
+
+```{r}
+#calculating probability mass distribution and cumulative distribution
+pmval=dpois(x,lambda=l)
+pmval
+```
+
+### Cumulative probability distribution
+
+```{r}
+#calculating cumulative density
+cdval=ppois(x,lambda = l)
+cdval
+```
+### Plotting the `pmf` and `cdf`
+
+```{r}
+par(mfrow=c(1,2))
+plot(x,pmval,xlab="x",ylab="P(X=x)", main="The Poisson Distribution")
+plot(x,cdval,xlab="x",ylab=expression(P(X<=x)),main="Cumulative Distribution Function")
+
+```
+
+
+## Results & discussions
+
+The `pmf` and `cf` of the Poisson distribution for given input parameters are evaluated and create respective plots.
+
+# Experiment 8: Normal Distribution
+
+## Aim
+
+1. To calculate probability mass density, probability distribution and quantiles using Normal distribution
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default). 
+
+The probability mass at a point $x$ can be evaluated using the syntax:
+
+>`dnorm(x=x,mean=m,sd=s)`.
+
+The probability distribution $P(X\leq x)$ is calculated using the `pnorm()` function. Syntax is: 
+
+>`pnorm(x,mean=m,sd=s)`
+
+The quantile for probability $p$ can be evaluated using the `qnorm()` function. Syntax is:
+
+>`qnorm(prob,mean=m,sd=s)`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required distribution
+
+* Step 2: Calculate the required probabilities
+
+* Step 3: Report the results
+
+
+>*Case:* Generate and draw the cdf and pdf of a normal distribution with mean=10 and standard deviation=3. Use values of $x$ from 0 to 20 in intervals of 1.
+
+## R code
+
+```{r}
+# create input parameters
+t=seq(0,20,1); mu=10;sd=3
+
+```
+### Prbability distribution
+
+```{r}
+#calculating probability mass distribution and cumulative distribution
+pmval=dnorm(t,mean = mu,sd=sd)
+pmval
+```
+
+### Cumulative probability distribution
+
+```{r}
+#calculating cumulative density
+cdval=pnorm(t,mean = mu,sd=sd)
+cdval
+```
+### Plotting the `pmf` and `cdf`
+
+```{r}
+par(mfrow=c(1,2))
+plot(t,pmval,xlab="t",ylab="P(X=t)", main="The Normal Distribution")
+plot(t,cdval,xlab="t",ylab=expression(P(X<=t)),main="Cumulative Distribution Function")
+
+```
+
+
+## Results & discussions
+
+The `pmf` and `cf` of the Normal distribution for given input parameters are evaluated and create respective plots.
+
+#  Experiment 9: Fitting of Distribution
+
+## Aim
+
+1. To fit a binomial distribution to the given data
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default). 
+
+Any observed distribution can be fitted to a theoretical distribution using the formula $N\times p(X=x)$  , where $N$ is the pdf of the target distribution.
+
+## Algorithm
+
+* Step 1: Assign the inputs for required fitting model
+
+* Step 2: Calculate the theoretical frequencies
+
+* Step 3: Visualize the observed distribution and theoretical distribution
+
+* Step 4: Compare the difference in orginal and fitted distributions
+
+
+>*Case:* The following data shows the result of throwing 12 fair dice 4,096 times; a throw of 4,5, or 6 being called success.
+
+$\begin{array}{|l|ccccccccccccc|}\hline \text{Success(X)}:& 0 &1& 2& 3& 4 &5& 6& 7& 8& 9& 10& 11& 12\\\hline \text{Frequency(f)}:& 0 &7& 60& 198& 430& 731& 948& 847& 536& 257& 71& 11& 0\\\hline \end{array}$
+
+Fit a binomial distribution and find the expected frequencies. Compare the graphs of the observed frequency and theoretical frequency.
+
+
+## R code
+
+```{r}
+# create input parameters
+p=3/6
+Observed=c(0 ,7, 60,198,430,731,948,847,536, 257, 71,11, 0)
+success=seq(0,12,1)
+N=sum(Observed)
+```
+
+### Theoretical distribution
+
+```{r}
+#calculating theoretical frequencies
+TF=round(N*dbinom(success,size=12,prob=p),2)
+TF
+```
+### Plotting the observed and theoretical frequencies
+```{r}
+par(mfrow=c(1,2))
+plot(success,Observed,xlab="success",ylab="f(x)")
+title("Observed Distribution")
+plot(success,TF,xlab="success",ylab="TF")
+title("Fitted Binomial Distribution")
+
+```
+
+### Fitting table
+
+```{r}
+Fit=data.frame(Success=success,Observed,Fitted_binom=TF)
+knitr::kable(
+  Fit, caption = 'The binomial fitting table',
+  booktabs = TRUE)
+```
+
+
+## Results & discussions
+
+Given arbitrary distribution is mapped into the framework of a binomial distribution. 
+
+# Experiment 10: Correlation analysis- Karl-Pearson Coefficient of Correlation
+
+## Aim
+
+1. To find the correlation coefficient of the given bivariate data
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default). 
+
+**Pearson correlation (r)**, which measures a linear dependence between two variables (x and y). It’s also known as a parametric correlation test because it depends to the distribution of the data. It can be used only when x and y are from normal distribution. The plot of $y = f(x)$ is named the linear regression curve. The Pearson correlation formula is:
+$$r = \frac{\sum{(x-m_x)(y-m_y)}}{\sqrt{\sum{(x-m_x)^2}\sum{(y-m_y)^2}}}$$ 
+
+where $m_x$ and $m_y$ are means of the distributions x and y respectively.
+
+Correlation coefficient can be computed using the functions `cor()` or `cor.test()`:
+
+**Syntax:**
+
+> `cor(x, y, method = c("pearson", "kendall", "spearman"))`
+ `cor.test(x, y, method=c("pearson", "kendall", "spearman"))`
+
+>Note: If the data contain missing values, use the following R code to handle missing values by case-wise deletion.
+
+`cor(x, y,  method = "pearson", use = "complete.obs")`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required correlation model
+
+* Step 2: Calculate the correlation coefficient
+
+* Step 3: Verify the result using direct calculation
+
+* Step 4: Interpret the result
+
+
+>*Case:*  From the following data, compute Karl Pearson's coefficient of correlation.
+
+$\begin{array}{|l|ccccccc|}\hline
+\text{Price(Rupees)}:& 10& 20& 30& 40& 50& 60& 70\\\hline
+\text{Supply(Units)}:& 8& 6& 14& 16& 10& 20& 24\\\hline
+\end{array}$
+
+
+## R code
+
+```{r}
+# loading data
+price=c(10,20,30,40,50,60,70)
+supply=c(8,6,14,16,10,20,24)
+```
+
+
+
+### Calculating correlation coefficient
+
+```{r}
+resp1=cor.test(price,supply,method='pearson')
+resp1
+```
+
+### Direct calculation
+
+Formula is: $$r = \frac{\sum{(x-m_x)(y-m_y)}}{\sqrt{\sum{(x-m_x)^2}\sum{(y-m_y)^2}}}$$ 
+
+```{r}
+#direct calculation
+rho=(sum(((price-mean(price))*(supply-mean(supply)))))/(sqrt(sum((price-mean(price))^2)*(sum((supply-mean(supply))^2))))
+rho
+```
+
+### Plotting the variables
+```{r}
+my_data=data.frame(price=price,supply=supply)
+head(my_data)
+```
+
+
+
+```{r , fig.cap='Scatter plot with smooth fit curve', out.width='80%', fig.asp=.75, fig.align='center',warning=FALSE}
+
+library(ggpubr)
+ggscatter(my_data, x = "price", y = "supply", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Price", ylab = "Supply")
+```
+
+
+
+## Results & discussions
+
+Correlation coefficient of given bivariate data is calculated using built-in function in `stats` package. The result is verified using direct calculation.
+
+Since the Pearson coefficient is `r resp1$estimate`. Also p-value is `r resp1$p.value ` <0.05. So the null hypothesis is accepted. So it is statistically reasonable to conclude that there is a significant positive correlation between the price and supply based on the sample.
+
+
+
+# References {.unnumbered}
